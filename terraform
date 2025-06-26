@@ -1,2 +1,15 @@
 1)Terraform provisioners. 
+Terraform Provisioners are used for executing scripts or shell commands on a local or remote machine as part of resource creation/deletion.
+Creation-time provisioners
+  By default, provisioners run when the resource they are defined within is created. 
+  Creation-time provisioners are only run during creation, not during updating or any other lifecycle. 
+  They are meant as a means to perform bootstrapping of a system. So, if a creation-time provisioner fails, the resource is marked as tainted. A tainted resource will be planned for destruction and recreation upon the next terraform apply.
+
+Destroy-time provisioners
+If when = destroy is specified, the provisioner will run when the resource it is defined within is destroyed.
+
+Destroy provisioners are run before the resource is destroyed. 
+If they fail, Terraform will error and rerun the provisioners again on the next terraform apply.
+Due to this behavior, care should be taken to destroy provisioners to be safe to run multiple times.
+
 2)Terraform statefile
