@@ -108,3 +108,25 @@ Best Practices:
    Avoid mounting sensitive host directories
    Use named volumes instead of anonymous ones
    Regular volume backups for critical data
+---
+
+4) Can we install docker inside a container?
+Yes, you can install Docker inside a container, but there are several approaches with different trade-offs:
+
+1. Docker-in-Docker (DinD) - True Nested Docker
+   # Run with privileged mode (required for DinD)
+   docker run --privileged -d --name dind docker:dind
+
+   # Run container that can use Docker
+   docker run --privileged -it docker:latest sh
+2. Docker Socket Mounting (Recommended)
+   Mount the host's Docker socket into the container:
+   # Mount Docker socket
+   docker run -it --rm \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+     docker:latest sh
+
+   # Now you can run docker commands inside container
+   docker ps  # Shows host's containers
+
+
