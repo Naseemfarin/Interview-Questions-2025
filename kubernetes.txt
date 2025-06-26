@@ -1,1 +1,55 @@
+1)Kubernetes architecture
+Kubernetes follows a master-worker architecture pattern, where the cluster is divided into two main parts:
 
+1. Control Plane (Master Node)
+The control plane manages the cluster and makes global decisions. It consists of:
+
+API Server (kube-apiserver):
+  The central management entity and primary interface for the cluster
+  Exposes the Kubernetes REST API
+  All components communicate through the API server
+  Handles authentication, authorization, and validation
+  Stores cluster state in etcd
+etcd
+  Distributed key-value store that holds all cluster data
+  Stores configuration data, state information, and metadata
+  Provides strong consistency and high availability
+  Acts as the "source of truth" for the cluster
+Scheduler (kube-scheduler)
+  Assigns newly created pods to nodes
+  Makes scheduling decisions based on resource requirements, constraints, and policies
+  Considers factors like CPU, memory, affinity rules, and taints/tolerations
+Controller Manager (kube-controller-manager)
+  Runs various controllers that regulate cluster state
+  Examples include:
+  Node Controller: Monitors node health
+  Replication Controller: Maintains desired number of pod replicas
+  Endpoints Controller: Manages service endpoints
+  Service Account Controller: Creates default service accounts
+2. Worker Nodes (Data Plane)
+Worker nodes run the actual workloads and consist of:
+Kubelet
+  Primary node agent that runs on each worker node
+  Communicates with the API server
+  Manages pods and containers on the node
+  Reports node and pod status back to the control plane
+  Pulls container images and starts/stops containers
+Kube-proxy
+  Network proxy that maintains network rules
+  Handles service discovery and load balancing
+  Routes traffic to appropriate pods
+  Implements Services abstraction
+Container Runtime
+  Software responsible for running containers
+  Common runtimes include Docker, containerd, CRI-O
+  Interfaces with kubelet through Container Runtime Interface (CRI
+---
+
+2)Deployment vs stateful set
+  Feature	Deployment- StatefulSet
+  Pod Identity	Random names -	Ordered names (app-0, app-1)
+  Storage	Shared or no storage -	Unique persistent storage per pod
+  Scaling	Parallel scaling	- Sequential scaling
+  Network	Service load balances	- Stable hostname per pod
+  Updates	Rolling updates -	Ordered updates
+  Use Cases	Web servers, APIs -Databases, message queues
