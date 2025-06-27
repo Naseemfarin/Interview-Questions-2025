@@ -11,5 +11,44 @@ If when = destroy is specified, the provisioner will run when the resource it is
 Destroy provisioners are run before the resource is destroyed. 
 If they fail, Terraform will error and rerun the provisioners again on the next terraform apply.
 Due to this behavior, care should be taken to destroy provisioners to be safe to run multiple times.
+---
 
 2)Terraform statefile
+---
+3) If we have created 3 instances using terraform script and the instance names are mentioned as a list
+Suppose we removed 2nd instance name from the list and applied script again then what will happen to the already 3 instances created before.
+  variable "instance_names" {
+  default = ["instance-1", "instance-2", "instance-3"]
+}
+
+2 ways using count and for_each.
+count:
+resource "aws_instance" "example" {
+  count = length(var.instance_names)
+  ami           = "ami-xxxxxx"
+  instance_type = "t2.micro"
+  tags = {
+    Name = var.instance_names[count.index]
+  }
+}
+for_Each:
+resource "aws_instance" "example" {
+  for_each = toset(var.instance_names)
+  ami           = "ami-xxxxxx"
+  instance_type = "t2.micro"
+  tags = {
+    Name = each.value
+  }
+}
+
+Approach
+What happens when you remove "instance-2"?
+count: "instance-2" destroyed, "instance-3" destroyed & recreated
+for_each: Only "instance-2" destroyed; others untouched
+
+---
+
+
+
+
+
