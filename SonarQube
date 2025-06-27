@@ -1,0 +1,13 @@
+1) Difference between code quality and code coverage.
+    Code quality is about how good the code is.
+    Code coverage is about how much of the code is tested.
+    High code coverage does not guarantee high code quality, and vice versa; both are important for robust software.
+2) Default quality gate in snar?
+   A quality gate is a set of thresholds and rules (conditions) applied to code analysis results. If the code does not meet these conditions, the quality gate fails.
+   The Sonar way quality gate is the default and recommended quality gate which focuses on keeping new code clean, rather than spending a lot of effort remediating old code.
+   The Sonar way quality gate has four conditions: 
+     No new issues are introduced
+     All new Security Hotspots are reviewed
+     New code test coverage is greater than or equal to 80.0%
+     Duplication in the new code is less than or equal to 3.0%
+     
