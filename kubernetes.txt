@@ -53,3 +53,16 @@ Container Runtime
   Network	Service load balances	- Stable hostname per pod
   Updates	Rolling updates -	Ordered updates
   Use Cases	Web servers, APIs -Databases, message queues
+---
+3) How to run a yaml manifest without a yaml manifest file created.
+
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - name: mycontainer
+    image: nginx
+EOF
