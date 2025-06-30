@@ -66,3 +66,30 @@ spec:
   - name: mycontainer
     image: nginx
 EOF
+---
+
+4) HPA triggers (what and all types of triggers you have used in HPA so far)
+kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
+Common HPA Triggers
+
+
+CPU Utilization:
+The most common trigger.
+HPA monitors the average CPU usage across pods and scales up/down to maintain a target CPU utilization percentage.
+Example: Scale when average CPU > 70%.
+
+Memory Utilization:
+HPA can monitor average memory usage and scale accordingly.
+Requires metrics server or a custom metrics provider.
+
+Custom Metrics:
+HPA can use application-specific or external metrics (e.g., requests per second, queue length).
+Requires integration with the Kubernetes Custom Metrics API.
+
+External Metrics:
+Metrics from outside the cluster (e.g., cloud monitoring, external APIs).
+Requires the External Metrics API.
+---
+
+5) Stateful Vs Stateless
+6) How do you manage data of stateless application?
