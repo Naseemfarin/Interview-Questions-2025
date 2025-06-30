@@ -47,8 +47,18 @@ count: "instance-2" destroyed, "instance-3" destroyed & recreated
 for_each: Only "instance-2" destroyed; others untouched
 
 ---
+4) In Terraform, what is the purpose of init, plan, and apply commands?
+Command             Purpose                                           When to Use
+terraform init     Initialize working directory & providers          First time or config change
+terraform plan     Preview changes to infrastructure                 Before making changes
+terraform apply    Apply changes to reach desired state              After reviewing the plan
 
+---
+5) What happens if the Terraform state file is accidentally deleted?
 
+have a regular backup of your state file! Try to configure your Terraform backend in a remote place, like Google Cloud Storage
+The process of recovering a deleted state file is never easy. You should import all the resources with terraform import. Check this document.
+If someone changes a resource via the Azure portal and if you do a terraform plan in your environment, you should check that changes were done outside Terraform. Then you should update your code to match those changes, after applying your code. To clarify, if someone changes your instance_type = c4.xlarge and you have at your code instance_type = t3.micro, if you apply your code, that change will be reverted so if you want to stay with instances with c4.xlarge you should change your code.
 
 
 
