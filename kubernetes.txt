@@ -93,3 +93,10 @@ Requires the External Metrics API.
 
 5) Stateful Vs Stateless
 6) How do you manage data of stateless application?
+7) In K8s, as etcd is a key-value store db, can write something manually on it?
+    yes we can , using etcdctl put command
+    Applications store keys into the etcd cluster by writing to keys. Every stored key is replicated to all etcd cluster         members through the Raft protocol to achieve consistency and reliability.
+
+    Here is the command to set the value of key foo to bar:
+
+    $ etcdctl put foo bar
