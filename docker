@@ -128,5 +128,12 @@ Yes, you can install Docker inside a container, but there are several approaches
 
    # Now you can run docker commands inside container
    docker ps  # Shows host's containers
+---
+
+5) difference between cmd and entry point?
+
+A common pattern is to use ENTRYPOINT to specify the core command and CMD to provide default arguments or to allow customization of that command. 
+
+
 
 
